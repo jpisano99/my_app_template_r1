@@ -13,5 +13,7 @@ Statics:
     Leave Path: /static/
     CHANGE Directory from: static/ to my_app/static
 
-
+SmartSheet requires enum34 and enum34 causes the following error
+Throws error: flask aws AttributeError: module 'enum' has no attribute 'IntFlag'
+In Python 3.6 you can simply REMOVE enum34 to resolve this problem
 
