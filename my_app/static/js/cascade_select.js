@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    //alert("doc ready .. ");
+    //alert("doc ready ... ");
 
     var tmp = $("#level1").val();
     if (tmp == null){
