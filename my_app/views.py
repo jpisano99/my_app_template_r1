@@ -69,6 +69,30 @@ def modify(action,id):
     return render_template('modify.html', record=record,action=action)
 
 
+@app.route('/saveit/<int:id>',methods=['GET', 'POST'])
+def saveit(id):
+    if request.method == 'POST':
+        record = Coverage.query.filter(Coverage.id == id)
+        action = request.form['btnClick']
+        print("Action taken :", action, record[0].id, record[0].pss_name)
+        if action == 'edit':
+            record[0].pss_name = request.form['pss_name']
+            record[0].tsa_name = request.form['tsa_name']
+            record[0].sales_level_1 = request.form['sales_level_1']
+            record[0].sales_level_2 = request.form['sales_level_2']
+            record[0].sales_level_3 = request.form['sales_level_3']
+            record[0].sales_level_4 = request.form['sales_level_4']
+            record[0].sales_level_5 = request.form['sales_level_5']
+            record[0].fiscal_year = request.form['fiscal_year']
+            db.session.commit()
+        elif action == 'delete':
+            names = Coverage.query.filter(Coverage.id == id).delete()
+            db.session.commit()
+        elif action == 'mail':
+            pass
+
+    return render_template('index.html')
+
 #
 # Error handling pages
 #
