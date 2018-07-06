@@ -3,7 +3,7 @@
 #
 
 passwords = dict(
-    DB_PASSWORD="database_password_123",
+    DB_PASSWORD="db_password",
     USER_PASSWORD = "password",
     SS_TOKEN="API_key_abc"
 )
