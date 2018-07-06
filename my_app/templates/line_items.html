@@ -96,7 +96,7 @@
               <ul class="pagination mx-auto text-center">
               {% for page in details.iter_pages() %}
                 {% if page %}
-                  <li class="page-item"><a class="page-link" href="{{ url_for('detail',page_num=page) }}">{{ page }}</a></li>
+                  <li class="page-item"><a class="page-link" href="{{ url_for('line_items',page_num=page) }}">{{ page }}</a></li>
                 {% else %}
                     ...
                 {% endif %}

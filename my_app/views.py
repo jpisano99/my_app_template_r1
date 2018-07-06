@@ -35,14 +35,38 @@ def index():
     return render_template('basic_index.html',my_ver = my_ver)
 
 
-@app.route('/get_levels' ,methods=['GET','POST'])
-def get_levels():
+@app.route('/cascade_select' ,methods=['GET','POST'])
+def cascade_select():
     if request.method == 'POST':
         hierarchy = json.loads((request.data).decode("utf-8"))
         levelArray = build_sales_list(hierarchy)
         return jsonify({'levels': levelArray})
     else:
         return render_template('cascade_select.html')
+
+@app.route('/line_items/<int:page_num>')
+def line_items(page_num):
+    # Display db rows with options for delete/edit/email
+    # Sourced from YouTube pagination example
+    # https://www.youtube.com/watch?v=hkL9pgCJPNk
+    details = Coverage.query.paginate(per_page=6,page=page_num,error_out=True)
+    print ('query result',details)
+    return render_template('line_items.html',details=details,my_name='any')
+
+
+@app.route('/modify/<string:action>/<int:id>', methods=['GET', 'POST'])
+def modify(action,id):
+    record = Coverage.query.filter(Coverage.id == id)
+    if action == 'delete':
+        action = ['delete','Delete this ?']
+    elif action == 'mail':
+        action =  ['mail','Mail This ?']
+    elif action == 'edit':
+        action = ['edit','Save Changes ?']
+
+    print("Action request :",action,record[0].id,record[0].pss_name)
+
+    return render_template('modify.html', record=record,action=action)
 
 
 #

@@ -50,7 +50,7 @@ function load_vals(){
 function look_up(hierarchy,query_level){
     $.ajax({
         type: "POST",
-        url: "/get_levels",
+        url: "/cascade_select",
         contentType: "text/json; charset=utf-8",
         data: JSON.stringify(hierarchy),
         success: function (data) {
